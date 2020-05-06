@@ -1,0 +1,37 @@
+# 인터렉티브 그래프(interactive graph)
+
+install.packages("plotly")
+
+library("tidyverse")
+library("plotly")
+
+#ggplot2: mpg데이터 프레임에서
+# 배기량(displ), 구동방식( drv), 고속도로연비(hwy) 간의 비교관계
+
+g <- ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = drv))
+g
+
+ggplotly(g)
+
+# 구동방식(drv)별 고속도로 연비 boxplot
+g <- ggplot(data= mpg) +
+  geom_boxplot(mapping = aes(x = drv, y = hwy))
+ggplotly(g)
+
+
+# ggplot2 :: diamonds 데이터 프레임에서
+# cut 변수의 막대 그래프.
+
+str(diamonds)
+table(diamonds$cut)
+
+g <- ggplot(data = diamonds) +
+  geom_col(mapping =  aes(x = cut))
+
+# cut, clarity 변수의 막대 그래프
+table(diamonds$cut, diamonds$clarity)
+g <- ggplot (data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity),
+           position = "dodge")
+ggplotly(g)
